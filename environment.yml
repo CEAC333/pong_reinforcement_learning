@@ -1,0 +1,13 @@
+# Instructions to run:
+# cd to folder containing this file
+# conda env create
+# source activate pong
+
+name: pong
+dependencies:
+- python=2.7
+- numpy>=1.7
+- opencv>=2.4.8
+- pip:
+  - pygame>=1.9.3
+  - https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.0-py2-none-any.whl
