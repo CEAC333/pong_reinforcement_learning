@@ -27,5 +27,5 @@ python RL.py
 
 ##Credits
 
-Code originally developed by [malreddysid](https://github.com/malreddysid), updated by[llSourcell](https://github.com/llSourcell). I've adapted it to TF 1.0 and adapted to be used for an exercise.
+Code originally developed by [malreddysid](https://github.com/malreddysid), updated by [llSourcell](https://github.com/llSourcell). I've adapted it to TF 1.0, Anaconda python and adapted to be used for an exercise.
 
