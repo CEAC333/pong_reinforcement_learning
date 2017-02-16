@@ -21,7 +21,7 @@ OBSERVE = 50000
 REPLAY_MEMORY = 500000
 # batch size to train on
 BATCH = 100
-# input size in pixels
+# input image size in pixels
 INPUT_SIZE = 84
 
 # create tensorflow graph

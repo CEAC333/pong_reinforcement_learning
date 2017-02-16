@@ -47,29 +47,23 @@ screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
 
 def drawBall(ballXPos, ballYPos):
-    # small rectangle, create it
     ball = pygame.Rect(ballXPos, ballYPos, BALL_WIDTH, BALL_HEIGHT)
-    # draw it
     pygame.draw.rect(screen, WHITE, ball)
 
 
 def drawPaddle1(paddle1YPos):
-    # crreate it
     paddle1 = pygame.Rect(PADDLE_BUFFER,
                           paddle1YPos,
                           PADDLE_WIDTH,
                           PADDLE_HEIGHT)
-    # draw it
     pygame.draw.rect(screen, WHITE, paddle1)
 
 
 def drawPaddle2(paddle2YPos):
-    # create it, opposite side
     paddle2 = pygame.Rect(WINDOW_WIDTH - PADDLE_BUFFER - PADDLE_WIDTH,
                           paddle2YPos,
                           PADDLE_WIDTH,
                           PADDLE_HEIGHT)
-    # draw it
     pygame.draw.rect(screen, WHITE, paddle2)
 
 
@@ -84,8 +78,8 @@ def updateBall(paddle1YPos, paddle2YPos,
     ballYPos = ballYPos + ballYDirection * BALL_Y_SPEED
     score = 0
 
-    # checks for a collision, if the ball hits the left side, our learning
-    # agent
+    # checks for a collision, if the ball hits the left side,
+    # our learning agent
     if (ballXPos <= PADDLE_BUFFER + PADDLE_WIDTH and
         ballYPos + BALL_HEIGHT >= paddle1YPos and
         ballYPos - BALL_HEIGHT <= paddle1YPos + PADDLE_HEIGHT):
@@ -115,8 +109,7 @@ def updateBall(paddle1YPos, paddle2YPos,
                 ballXPos, ballYPos,
                 ballXDirection, ballYDirection]
 
-    # if it hits the top
-    # move down
+    # if it hits the top, move down
     if (ballYPos <= 0):
         ballYPos = 0
         ballYDirection = 1
@@ -164,7 +157,6 @@ def updatePaddle2(paddle2YPos, ballYPos):
 
 # game class
 class PongGame:
-
     def __init__(self):
         # random number for initial direction of ball
         num = random.randint(0, 9)
@@ -197,7 +189,7 @@ class PongGame:
         # where it will start, y part
         self.ballYPos = num * (WINDOW_HEIGHT - BALL_HEIGHT) / 9
 
-    #
+
     def getPresentFrame(self):
         # for each frame, calls the event queue, like if the main window needs
         # to be repainted
@@ -217,22 +209,26 @@ class PongGame:
         # return our surface data
         return image_data
 
-    # update our screen
+
     def getNextFrame(self, action):
         pygame.event.pump()
         score = 0
         screen.fill(BLACK)
+        
         # update our paddle
         self.paddle1YPos = updatePaddle1(action, self.paddle1YPos)
         drawPaddle1(self.paddle1YPos)
+
         # update evil AI paddle
         self.paddle2YPos = updatePaddle2(self.paddle2YPos, self.ballYPos)
         drawPaddle2(self.paddle2YPos)
+        
         # update our vars by updating ball position
         [score, self.paddle1YPos, self.paddle2YPos, self.ballXPos,
          self.ballYPos, self.ballXDirection, self.ballYDirection] = updateBall(self.paddle1YPos, self.paddle2YPos, self.ballXPos,
                                                                                self.ballYPos, self.ballXDirection, self.ballYDirection)  # draw the ball
         drawBall(self.ballXPos, self.ballYPos)
+        
         # get the surface data
         image_data = pygame.surfarray.array3d(pygame.display.get_surface())
         # update the window
