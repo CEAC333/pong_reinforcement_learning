@@ -47,7 +47,8 @@ def createGraph():
 # deep q network. feed in pixel data to graph session
 def trainGraph(inp, out, sess):
 
-    # to calculate the argmax, we multiply the predicted output with a vector
+    # to calculate the argmax, we multiply
+    # the predicted output with a vector
     # with one value 1 and rest as 0
     argmax = tf.placeholder("float", [None, ACTIONS])
     gt = tf.placeholder("float", [None])  # ground truth
@@ -60,7 +61,7 @@ def trainGraph(inp, out, sess):
     
     # YOUR CODE HERE
 
-    # optimization fucntion to reduce our minimize our cost function
+    # optimization function to reduce our minimize our cost function
     
     # YOUR CODE HERE
 
@@ -118,8 +119,9 @@ def trainGraph(inp, out, sess):
         inp_t1 = np.append(frame, inp_t[:, :, 0:3], axis=2)
 
         # add our input tensor, argmax tensor, reward and updated input tensor
-        # tos tack of experiences
-        D.append((inp_t, argmax_t, reward_t, inp_t1))
+        # to stack of experiences
+        
+        # YOUR CODE HERE
 
         # if we run out of replay memory, make room
         if len(D) > REPLAY_MEMORY:

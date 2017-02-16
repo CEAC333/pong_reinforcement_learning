@@ -48,17 +48,15 @@ def drawBall(ballXPos, ballYPos):
 # Paddle 1 is our learning agent/us
 # draw to the left of the screen
 def drawPaddle1(paddle1YPos):
-    paddle1 = pygame.Rect(PADDLE_BUFFER,
-                          paddle1YPos,
-                          PADDLE_WIDTH,
-                          PADDLE_HEIGHT)
-    pygame.draw.rect(screen, WHITE, paddle1)
+
+    # YOUR CODE HERE
 
 
 # paddle 2 is the evil AI
 # draw to the right of the screen
+def drawPaddle2(paddle2YPos):
 
-# YOUR CODE HERE
+    # YOUR CODE HERE
 
 
 # update the ball, using the paddle posistions the balls positions and the

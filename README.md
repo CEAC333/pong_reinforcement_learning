@@ -35,3 +35,4 @@ Code originally developed by [malreddysid](https://github.com/malreddysid), upda
 - http://karpathy.github.io/2016/05/31/rl/
 - http://rll.berkeley.edu/deeprlcourse/
 - http://www.wildml.com/2016/10/learning-reinforcement-learning/
+- https://www.nervanasys.com/demystifying-deep-reinforcement-learning/

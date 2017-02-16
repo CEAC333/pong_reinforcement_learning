@@ -81,7 +81,7 @@ def trainGraph(inp, out, sess):
     action = tf.reduce_sum(tf.multiply(out, argmax), reduction_indices=1)
     # cost function we will reduce through backpropagation
     cost = tf.reduce_mean(tf.square(action - gt))
-    # optimization fucntion to reduce our minimize our cost function
+    # optimization function to reduce our minimize our cost function
     train_step = tf.train.AdamOptimizer(1e-6).minimize(cost)
 
     # initialize our game
@@ -137,7 +137,7 @@ def trainGraph(inp, out, sess):
         inp_t1 = np.append(frame, inp_t[:, :, 0:3], axis=2)
 
         # add our input tensor, argmax tensor, reward and updated input tensor
-        # tos tack of experiences
+        # to stack of experiences
         D.append((inp_t, argmax_t, reward_t, inp_t1))
 
         # if we run out of replay memory, make room
