@@ -18,10 +18,14 @@ For manual install, here are the required dependencies and links to install them
 
 
 ##Usage 
-Run it like this in terminal. The longer you let it run, the better it will get.
+Once you've completed the exercises, you can run it like in terminal:
 ```
 python RL.py
 ```
+The longer you let it run, the better it will get.
+
+##Solutions
+Solution code is provided in the solutions folder.
 
 ##Credits
 
