@@ -57,8 +57,12 @@ def drawPaddle1(paddle1YPos):
 
 # paddle 2 is the evil AI
 # draw to the right of the screen
-
-# YOUR CODE HERE
+def drawPaddle2(paddle2YPos):
+    paddle2 = pygame.Rect(WINDOW_WIDTH - PADDLE_BUFFER - PADDLE_WIDTH,
+                          paddle2YPos,
+                          PADDLE_WIDTH,
+                          PADDLE_HEIGHT)
+    pygame.draw.rect(screen, WHITE, paddle2)
 
 
 # update the ball, using the paddle posistions the balls positions and the
@@ -89,8 +93,19 @@ def updateBall(paddle1YPos, paddle2YPos,
                 ballXDirection, ballYDirection]
 
     # check if hits the other side
-
-    # YOUR CODE HERE
+    if (ballXPos >= WINDOW_WIDTH - PADDLE_WIDTH - PADDLE_BUFFER and
+        ballYPos + BALL_HEIGHT >= paddle2YPos and
+        ballYPos - BALL_HEIGHT <= paddle2YPos + PADDLE_HEIGHT):
+        # switch directions
+        ballXDirection = -1
+    # past it
+    elif (ballXPos >= WINDOW_WIDTH - BALL_WIDTH):
+        # positive score
+        ballXDirection = -1
+        score = 1
+        return [score, paddle1YPos, paddle2YPos,
+                ballXPos, ballYPos,
+                ballXDirection, ballYDirection]
 
     # if it hits the top, move down
     if (ballYPos <= 0):
@@ -108,18 +123,35 @@ def updateBall(paddle1YPos, paddle2YPos,
 # update our paddle position
 # this is controlled by the action input
 def updatePaddle1(action, paddle1YPos):
+    # if move up
+    if (action[1] == 1):
+        paddle1YPos = paddle1YPos - PADDLE_SPEED
+    # if move down
+    if (action[2] == 1):
+        paddle1YPos = paddle1YPos + PADDLE_SPEED
 
-    # YOUR CODE HERE
-
+    # don't let it move off the screen
+    if (paddle1YPos < 0):
+        paddle1YPos = 0
+    if (paddle1YPos > WINDOW_HEIGHT - PADDLE_HEIGHT):
+        paddle1YPos = WINDOW_HEIGHT - PADDLE_HEIGHT
     return paddle1YPos
 
 # update evil AI paddle position
 # this is controlled by the position of the ball
 def updatePaddle2(paddle2YPos, ballYPos):
     # move down if ball is in upper half
-
-    # YOUR CODE HERE
-    
+    if (paddle2YPos + PADDLE_HEIGHT / 2 < ballYPos + BALL_HEIGHT / 2):
+        paddle2YPos = paddle2YPos + PADDLE_SPEED
+    # move up if ball is in lower half
+    if (paddle2YPos + PADDLE_HEIGHT / 2 > ballYPos + BALL_HEIGHT / 2):
+        paddle2YPos = paddle2YPos - PADDLE_SPEED
+    # don't let it hit top
+    if (paddle2YPos < 0):
+        paddle2YPos = 0
+    # dont let it hit bottom
+    if (paddle2YPos > WINDOW_HEIGHT - PADDLE_HEIGHT):
+        paddle2YPos = WINDOW_HEIGHT - PADDLE_HEIGHT
     return paddle2YPos
 
 

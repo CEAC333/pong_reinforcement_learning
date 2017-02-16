@@ -29,16 +29,41 @@ def createGraph():
 
     # CNN
     # creates an empty tensor with all elements set to zero with a shape
+    # TODO: change initialization
+    W_conv1 = tf.Variable(tf.zeros([8, 8, 4, 32]))
+    b_conv1 = tf.Variable(tf.zeros([32]))
 
-    # YOUR CODE HERE
+    W_conv2 = tf.Variable(tf.zeros([4, 4, 32, 64]))
+    b_conv2 = tf.Variable(tf.zeros([64]))
+
+    W_conv3 = tf.Variable(tf.zeros([3, 3, 64, 64]))
+    b_conv3 = tf.Variable(tf.zeros([64]))
+
+    W_fc4 = tf.Variable(tf.zeros([7 * 7 * 64, 784]))  # image size 7x7 due to convolutions
+    b_fc4 = tf.Variable(tf.zeros([784]))
+
+    W_fc5 = tf.Variable(tf.zeros([784, ACTIONS]))
+    b_fc5 = tf.Variable(tf.zeros([ACTIONS]))
 
     # input for pixel data
     s = tf.placeholder("float", [None, INPUT_SIZE, INPUT_SIZE, 4])
 
     # Computes rectified linear unit activation fucntion on  a 2-D convolution
-    # given 4-D input and filter tensors.
-    
-    # YOUR CODE HERE
+    # given 4-D input and filter tensors. and
+    conv1 = tf.nn.relu(
+        tf.nn.conv2d(s, W_conv1, strides=[1, 4, 4, 1], padding="VALID") + b_conv1)
+
+    conv2 = tf.nn.relu(
+        tf.nn.conv2d(conv1, W_conv2, strides=[1, 2, 2, 1], padding="VALID") + b_conv2)
+
+    conv3 = tf.nn.relu(
+        tf.nn.conv2d(conv2, W_conv3, strides=[1, 1, 1, 1], padding="VALID") + b_conv3)
+
+    conv3_flat = tf.reshape(conv3, [-1, 7 * 7 * 64])
+
+    fc4 = tf.nn.relu(tf.matmul(conv3_flat, W_fc4) + b_fc4)
+
+    fc5 = tf.matmul(fc4, W_fc5) + b_fc5
 
     # return input and output to the network
     return s, fc5
@@ -53,17 +78,11 @@ def trainGraph(inp, out, sess):
     gt = tf.placeholder("float", [None])  # ground truth
 
     # action
-
-    # YOUR CODE HERE
-
+    action = tf.reduce_sum(tf.multiply(out, argmax), reduction_indices=1)
     # cost function we will reduce through backpropagation
-    
-    # YOUR CODE HERE
-
+    cost = tf.reduce_mean(tf.square(action - gt))
     # optimization fucntion to reduce our minimize our cost function
-    
-    # YOUR CODE HERE
-
+    train_step = tf.train.AdamOptimizer(1e-6).minimize(cost)
 
     # initialize our game
     game = pong.PongGame()
@@ -109,11 +128,11 @@ def trainGraph(inp, out, sess):
         # reward tensor if score is positive
         reward_t, frame = game.getNextFrame(argmax_t)
 
-        # get frame pixel data
+         # get frame pixel data
         frame = cv2.cvtColor(cv2.resize(frame, (INPUT_SIZE, INPUT_SIZE)), cv2.COLOR_BGR2GRAY)
         ret, frame = cv2.threshold(frame, 1, 255, cv2.THRESH_BINARY)
         frame = np.reshape(frame, (INPUT_SIZE, INPUT_SIZE, 1))
-
+        
         # new input tensor
         inp_t1 = np.append(frame, inp_t[:, :, 0:3], axis=2)
 
