@@ -1,5 +1,3 @@
-# pong_neural_net_live
-
 ##Overview
 This is the code for the SF Python meetup group tutorial on reinforcement learning. We will build the game of [Pong](http://www.ponggame.org) using Pygame and then build a [Deep Q Network](https://www.quora.com/Artificial-Intelligence-What-is-an-intuitive-explanation-of-how-deep-Q-networks-DQN-work) using OpenCV and Tensorflow. Then we will train the network to play the game. The DQN is a convolutional neural network that reads in pixel data from the game and the game score. 
 
