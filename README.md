@@ -31,3 +31,7 @@ Solution code is provided in the solutions folder.
 
 Code originally developed by [malreddysid](https://github.com/malreddysid), updated by [llSourcell](https://github.com/llSourcell). I've adapted it to TF 1.0, Anaconda python and adapted to be used for an exercise.
 
+##References
+- http://karpathy.github.io/2016/05/31/rl/
+- http://rll.berkeley.edu/deeprlcourse/
+- http://www.wildml.com/2016/10/learning-reinforcement-learning/
