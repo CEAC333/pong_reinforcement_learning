@@ -100,7 +100,7 @@ def trainGraph(inp, out, sess):
     # saver
     saver = tf.train.Saver()
 
-    sess.run(tf.initialize_all_variables())
+    sess.run(tf.global_variables_initializer())
 
     t = 0
     epsilon = INITIAL_EPSILON
