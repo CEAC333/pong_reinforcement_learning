@@ -12,7 +12,6 @@ For manual install, here are the required dependencies and links to install them
 
 - python=2.7
 - numpy>=1.7
-- opencv>=2.4.8 (http://www.pyimagesearch.com/2015/06/15/install-opencv-3-0-and-python-2-7-on-osx/)
 - pygame>=1.9.3 (https://www.pygame.org/download.shtml)
 - tensorflow>=1.0.0 (https://www.tensorflow.org/install/)
 
