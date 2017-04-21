@@ -1,5 +1,4 @@
 import tensorflow as tf
-import cv2  # read in pixel data
 import pong  # our class
 import numpy as np  # math
 import random  # random
@@ -69,6 +68,7 @@ def createGraph():
     return s, fc5
 
 
+
 # deep q network. feed in pixel data to graph session
 def trainGraph(inp, out, sess):
 
@@ -93,16 +93,14 @@ def trainGraph(inp, out, sess):
     # intial frame
     frame = game.getPresentFrame()
     # convert rgb to gray scale for processing
-    frame = cv2.cvtColor(cv2.resize(frame, (INPUT_SIZE, INPUT_SIZE)), cv2.COLOR_BGR2GRAY)
-    # binary colors, black or white
-    ret, frame = cv2.threshold(frame, 1, 255, cv2.THRESH_BINARY)
+
     # stack frames, that is our input tensor
     inp_t = np.stack((frame, frame, frame, frame), axis=2)
 
     # saver
     saver = tf.train.Saver()
 
-    sess.run(tf.initialize_all_variables())
+    sess.run(tf.global_variables_initializer())
 
     t = 0
     epsilon = INITIAL_EPSILON
@@ -128,9 +126,6 @@ def trainGraph(inp, out, sess):
         # reward tensor if score is positive
         reward_t, frame = game.getNextFrame(argmax_t)
 
-         # get frame pixel data
-        frame = cv2.cvtColor(cv2.resize(frame, (INPUT_SIZE, INPUT_SIZE)), cv2.COLOR_BGR2GRAY)
-        ret, frame = cv2.threshold(frame, 1, 255, cv2.THRESH_BINARY)
         frame = np.reshape(frame, (INPUT_SIZE, INPUT_SIZE, 1))
         
         # new input tensor

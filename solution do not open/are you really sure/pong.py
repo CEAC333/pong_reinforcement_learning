@@ -1,6 +1,8 @@
 import pygame  # helps us make GUI games in python
 import random  # help us define which direction the ball will start moving in
 
+from pygame.transform import scale
+
 # DQN. CNN reads in pixel data.
 # reinforcement learning. trial and error.
 # maximize action based on reward
@@ -44,6 +46,7 @@ screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 def drawBall(ballXPos, ballYPos):
     ball = pygame.Rect(ballXPos, ballYPos, BALL_WIDTH, BALL_HEIGHT)
     pygame.draw.rect(screen, WHITE, ball)
+
 
 # Paddle 1 is our learning agent/us
 # draw to the left of the screen
@@ -188,6 +191,8 @@ class PongGame:
         num = random.randint(0, 9)
         # where it will start, y part
         self.ballYPos = num * (WINDOW_HEIGHT - BALL_HEIGHT) / 9
+        # scaled surface
+        self.scaled_surface = pygame.Surface((84, 84), depth=32)
 
 
     def getPresentFrame(self):
@@ -201,11 +206,13 @@ class PongGame:
         drawPaddle2(self.paddle2YPos)
         # draw our ball
         drawBall(self.ballXPos, self.ballYPos)
-        # copies the pixels from our surface to a 3D array. we'll use this for
-        # RL
-        image_data = pygame.surfarray.array3d(pygame.display.get_surface())
         # updates the window
         pygame.display.flip()
+
+        # copies the pixels from our surface to a 3D array. we'll use this for
+        # RL
+        pygame.transform.scale(pygame.display.get_surface(), (84, 84), self.scaled_surface)
+        image_data = pygame.surfarray.array2d(self.scaled_surface)
         # return our surface data
         return image_data
 
@@ -230,11 +237,15 @@ class PongGame:
         drawBall(self.ballXPos, self.ballYPos)
         
         # get the surface data
-        image_data = pygame.surfarray.array3d(pygame.display.get_surface())
+        # copies the pixels from our surface to a 3D array. we'll use this for
+        # RL
+        pygame.transform.scale(pygame.display.get_surface(), (84, 84), self.scaled_surface)
+        image_data = pygame.surfarray.array2d(self.scaled_surface)
+        # return our surface data
         # update the window
         pygame.display.flip()
         # record the total score
         self.tally = self.tally + score
-        print "Tally is " + str(self.tally)
+        print("Tally is " + str(self.tally))
         # return the score and the surface data
         return [score, image_data]
