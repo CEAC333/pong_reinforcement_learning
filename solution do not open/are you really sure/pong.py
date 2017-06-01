@@ -6,7 +6,7 @@ from pygame.transform import scale
 # DQN. CNN reads in pixel data.
 # reinforcement learning. trial and error.
 # maximize action based on reward
-# agent envrioment loop
+# agent environment loop
 # this is called Q Learning
 # based on just game state. mapping of state to action is policy
 # experience replay. learns from past policies
