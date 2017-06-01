@@ -28,21 +28,20 @@ def createGraph():
 
     # CNN
     # creates an empty tensor with all elements set to zero with a shape
-    # TODO: change initialization
-    W_conv1 = tf.Variable(tf.zeros([8, 8, 4, 32]))
-    b_conv1 = tf.Variable(tf.zeros([32]))
+    W_conv1 = tf.Variable(tf.random_normal([8, 8, 4, 32]))
+    b_conv1 = tf.Variable(tf.random_normal([32]))
 
-    W_conv2 = tf.Variable(tf.zeros([4, 4, 32, 64]))
-    b_conv2 = tf.Variable(tf.zeros([64]))
+    W_conv2 = tf.Variable(tf.random_normal([4, 4, 32, 64]))
+    b_conv2 = tf.Variable(tf.random_normal([64]))
 
-    W_conv3 = tf.Variable(tf.zeros([3, 3, 64, 64]))
-    b_conv3 = tf.Variable(tf.zeros([64]))
+    W_conv3 = tf.Variable(tf.random_normal([3, 3, 64, 64]))
+    b_conv3 = tf.Variable(tf.random_normal([64]))
 
-    W_fc4 = tf.Variable(tf.zeros([7 * 7 * 64, 784]))  # image size 7x7 due to convolutions
-    b_fc4 = tf.Variable(tf.zeros([784]))
+    W_fc4 = tf.Variable(tf.random_normal([7 * 7 * 64, 784]))  # image size 7x7 due to convolutions
+    b_fc4 = tf.Variable(tf.random_normal([784]))
 
-    W_fc5 = tf.Variable(tf.zeros([784, ACTIONS]))
-    b_fc5 = tf.Variable(tf.zeros([ACTIONS]))
+    W_fc5 = tf.Variable(tf.random_normal([784, ACTIONS]))
+    b_fc5 = tf.Variable(tf.random_normal([ACTIONS]))
 
     # input for pixel data
     s = tf.placeholder("float", [None, INPUT_SIZE, INPUT_SIZE, 4])
