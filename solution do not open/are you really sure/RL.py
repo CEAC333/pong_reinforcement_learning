@@ -7,7 +7,7 @@ from collections import deque
 
 
 # hyper params
-ACTIONS = 3  # up,down, stay
+ACTIONS = 3  # up, down, stay
 # define our learning rate
 GAMMA = 0.99
 # for updating our gradient or training over time
