@@ -5,8 +5,8 @@
 
 name: pong
 dependencies:
-- python=2.7
-- numpy>=1.7
+- python=3.6
+- numpy=1.12.1
 - pip:
-  - pygame>=1.9.3
-  - https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.0-py2-none-any.whl
+  - pygame=1.9.3
+  - tensorflow=1.1
